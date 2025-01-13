@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BKA Milestone Board Game</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="game-container">
+    <!-- Header -->
+    <header>
+      <h1>BKA Milestone Board Game</h1>
+      <p>Move along the roadmap to complete milestones and revitalize BKA!</p>
+    </header>
+
+    <!-- Game Board -->
+    <div class="board">
+      <div class="space" id="space-1">Start</div>
+      <div class="space" id="space-2">Finalize Bank Account</div>
+      <div class="space" id="space-3">Logo Refresh</div>
+      <div class="space" id="space-4">Unexpected Delay</div>
+      <div class="space" id="space-5">Develop Branded Brochures</div>
+      <div class="space" id="space-6">Submit First Proposal</div>
+      <div class="space" id="space-7">Recruit Accountability Partner</div>
+      <div class="space" id="space-8">Secure CSO Lead</div>
+      <div class="space" id="space-9">Bonus Knowledge Product</div>
+      <div class="space" id="space-10">Finish</div>
+    </div>
+
+    <!-- Player Info -->
+    <div class="players">
+      <div class="player" id="player-1">
+        <h3>Player 1 (Matt)</h3>
+        <p>Position: <span id="player-1-position">1</span></p>
+        <p>Progress: <span id="player-1-progress">0</span></p>
+      </div>
+      <div class="player" id="player-2">
+        <h3>Player 2 (Ben)</h3>
+        <p>Position: <span id="player-2-position">1</span></p>
+        <p>Progress: <span id="player-2-progress">0</span></p>
+      </div>
+    </div>
+
+    <!-- Controls -->
+    <div class="controls">
+      <button id="roll-dice" class="btn">Roll Dice</button>
+      <p id="dice-result">Roll: -</p>
+    </div>
+  </div>
+
+  <!-- Link to JavaScript -->
+  <script src="game.js"></script>
+</body>
+</html>

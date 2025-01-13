@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BKA Task Prioritization Game</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="game-container">
+    <!-- Header -->
+    <header>
+      <h1>BKA Task Prioritization Card Game</h1>
+      <p>Balance your resources to complete tasks and maximize progress!</p>
+    </header>
+
+    <!-- Resource Tracker -->
+    <div class="resources">
+      <div class="resource">
+        <h3>Time</h3>
+        <p id="time">12 Turns</p>
+      </div>
+      <div class="resource">
+        <h3>Money</h3>
+        <p id="money">$10,000</p>
+      </div>
+      <div class="resource">
+        <h3>Progress</h3>
+        <ul>
+          <li>Operational: <span id="progress-operational">0</span></li>
+          <li>Branding: <span id="progress-branding">0</span></li>
+          <li>Business Development: <span id="progress-business-development">0</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Task Card -->
+    <div class="task-card">
+      <h2>Current Task</h2>
+      <p id="task-name">Draw a task to begin</p>
+      <p>Type: <span id="task-type">-</span></p>
+      <p>Time Cost: <span id="task-time-cost">-</span></p>
+      <p>Money Cost: <span id="task-money-cost">-</span></p>
+      <p>Reward: <span id="task-reward">-</span></p>
+    </div>
+
+    <!-- Controls -->
+    <div class="controls">
+      <button id="draw-task" class="btn">Draw Task</button>
+      <button id="play-task" class="btn" disabled>Play Task</button>
+      <button id="skip-task" class="btn" disabled>Skip Task</button>
+    </div>
+  </div>
+  <!-- Link to JavaScript File -->
+  <script src="game.js"></script>
+</body>
+</html>

@@ -1,0 +1,98 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f9;
+    color: #333;
+  }
+  
+  h1, h3 {
+    margin: 0;
+  }
+  
+  .game-container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Header */
+  header {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  header h1 {
+    color: #2c3e50;
+  }
+  
+  /* Board */
+  .board {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+    margin: 20px 0;
+  }
+  
+  .space {
+    background: #ecf0f1;
+    padding: 20px;
+    text-align: center;
+    border-radius: 8px;
+    border: 1px solid #bdc3c7;
+  }
+  
+  .space#space-1 {
+    background: #3498db;
+    color: #fff;
+  }
+  
+  .space#space-10 {
+    background: #27ae60;
+    color: #fff;
+  }
+  
+  /* Players */
+  .players {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  
+  .player {
+    background: #dfe6e9;
+    padding: 10px;
+    text-align: center;
+    border-radius: 8px;
+    flex: 1;
+    margin: 0 10px;
+  }
+  
+  /* Controls */
+  .controls {
+    text-align: center;
+  }
+  
+  .btn {
+    padding: 10px 20px;
+    margin: 10px;
+    font-size: 16px;
+    color: #fff;
+    background: #3498db;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  
+  .btn:hover {
+    background: #2980b9;
+  }
+
+
+  
