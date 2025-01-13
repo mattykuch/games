@@ -22,34 +22,17 @@ const randomEvents = [
   { type: "neutral", description: "Nothing happens.", effect: (player) => {} }
 ];
 
-// Update UI with animations
+// Update UI
 function updateUI() {
-  // Update progress and positions in the sidebar
   player1PositionElement.textContent = players[0].position;
   player1ProgressElement.textContent = players[0].progress;
   player2PositionElement.textContent = players[1].position;
   player2ProgressElement.textContent = players[1].progress;
 
-  // Move player markers
-  moveMarker("player1-marker", players[0].position);
-  moveMarker("player2-marker", players[1].position);
-}
-
-// Move player marker to a specific space
-function moveMarker(markerId, position) {
-  const marker = document.getElementById(markerId);
-  const targetSpace = document.getElementById(`space-${position}`);
-  if (marker && targetSpace) {
-    const targetRect = targetSpace.getBoundingClientRect();
-    const boardRect = targetSpace.parentElement.getBoundingClientRect();
-
-    // Calculate position relative to the board
-    const offsetX = targetRect.left - boardRect.left + 5; // 5px padding for marker
-    const offsetY = targetRect.top - boardRect.top + 5;
-
-    // Apply transformation for smooth movement
-    marker.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
-  }
+  // Highlight current player position on the board
+  boardSpaces.forEach((space) => space.classList.remove("player1", "player2"));
+  document.getElementById(`space-${players[0].position}`).classList.add("player1");
+  document.getElementById(`space-${players[1].position}`).classList.add("player2");
 }
 
 // Roll the dice
@@ -65,7 +48,7 @@ function handleSpace(player) {
   if (space) {
     const spaceName = space.textContent;
 
-    // Handle each milestone or event
+    // Handle each space
     switch (spaceName) {
       case "Finalize Bank Account":
         alert(`${player.name} completed the milestone: Finalize Bank Account! Gain 10 progress points.`);
@@ -110,7 +93,6 @@ function handleSpace(player) {
       case "Finish":
         alert(`${player.name} completed the roadmap! Gain 25 bonus points.`);
         player.progress += 25;
-        rollDiceButton.disabled = true; // Disable further gameplay
         break;
 
       default:
@@ -144,7 +126,8 @@ rollDiceButton.addEventListener("click", () => {
   // Check if the player reached the end
   if (currentPlayer.position === 10) {
     alert(`${currentPlayer.name} reached the finish line! Final progress: ${currentPlayer.progress}`);
-    return; // End the game
+    rollDiceButton.disabled = true;
+    return;
   }
 
   // Switch to the next player

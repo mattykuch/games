@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BKA Progress Dashboard</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="dashboard-container">
+    <header>
+      <h1>BKA Progress Dashboard</h1>
+      <p>Track your progress on BKA’s 2025 roadmap in real-time.</p>
+    </header>
+
+    <!-- Progress Bars -->
+    <div class="progress-bars">
+      <div class="progress-item">
+        <h3>Operational Readiness</h3>
+        <div class="progress-bar">
+          <div id="progress-operational" class="progress-fill" style="width: 0%;"></div>
+        </div>
+      </div>
+      <div class="progress-item">
+        <h3>Branding</h3>
+        <div class="progress-bar">
+          <div id="progress-branding" class="progress-fill" style="width: 0%;"></div>
+        </div>
+      </div>
+      <div class="progress-item">
+        <h3>Business Development</h3>
+        <div class="progress-bar">
+          <div id="progress-business" class="progress-fill" style="width: 0%;"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Task Lists -->
+    <div class="task-lists">
+      <div class="task-list">
+        <h3>Operational Readiness</h3>
+        <ul id="tasks-operational">
+          <li>
+            Finalize Bank Account 
+            <button onclick="updateTask('operational', 10)">Mark Complete</button>
+          </li>
+          <li>
+            Recruit Accountability Partner 
+            <button onclick="updateTask('operational', 15)">Mark Complete</button>
+          </li>
+        </ul>
+      </div>
+      <div class="task-list">
+        <h3>Branding</h3>
+        <ul id="tasks-branding">
+          <li>
+            Logo Refresh 
+            <button onclick="updateTask('branding', 8)">Mark Complete</button>
+          </li>
+          <li>
+            Develop Branded Brochures 
+            <button onclick="updateTask('branding', 12)">Mark Complete</button>
+          </li>
+        </ul>
+      </div>
+      <div class="task-list">
+        <h3>Business Development</h3>
+        <ul id="tasks-business">
+          <li>
+            Submit First Proposal 
+            <button onclick="updateTask('business', 15)">Mark Complete</button>
+          </li>
+          <li>
+            Secure CSO Lead 
+            <button onclick="updateTask('business', 10)">Mark Complete</button>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Link to JavaScript -->
+  <script src="game.js"></script>
+</body>
+</html>
