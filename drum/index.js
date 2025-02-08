@@ -1,13 +1,29 @@
 
-var numberOfDrumButtons = document.querySelectorAll(".drum").length;
+var numberOfDrumButtons = document.querySelectorAll(".drum").length; // Calculate no. of drum buttons
 
-for (var i = 0 ; i < numberOfDrumButtons ; i++) {
+for (var i = 0 ; i < numberOfDrumButtons ; i++) { // Loop through each button and add sound based on which button is clicked
 
-document.querySelectorAll(".drum")[i].addEventListener("click",function () {
+document.querySelectorAll(".drum")[i].addEventListener("click",function () { 
    
     var buttonInnerHTML = this.innerHTML; 
 
-    switch (buttonInnerHTML) {
+    makeSound(buttonInnerHTML);
+        
+    
+});
+
+}
+
+// Add event listener based on keyboard being pressed
+
+document.addEventListener("keydown", function(event){
+
+    makeSound(event.key);
+
+});
+
+function makeSound (key){
+    switch (key) {
         case "w":
             var tom1 = new Audio("./assets/sounds/tom-1.mp3");
             tom1.play();
@@ -53,8 +69,7 @@ document.querySelectorAll(".drum")[i].addEventListener("click",function () {
             
         default: console.log(buttonInnerHTML);
 
-    }    
-    
-});
+    }
 
-}
+
+}  
