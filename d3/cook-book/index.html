@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>D3.js Cookbook and Code Reference </title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f8f8f8;
+        }
+        .navbar {
+            background: #333;
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+        .navbar a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background: white;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        svg {
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <a href="#intro">Introduction</a>
+        <a href="#bar-chart">Bar Chart</a>
+        <a href="#line-chart">Line Chart</a>
+        <a href="#scatter-plot">Scatter Plot</a>
+        <a href="#pie-chart">Pie Chart</a>
+    </div>
+    
+    <div class="container" id="intro">
+        <h1>My D3.js Cookbook and Code Reference</h1>
+        <p>This website serves as a reference / cook book for myself, when it comes to D3.js. But, it will also teach anyone the fundamentals of data visualization using D3.js.</p>
+    </div>
+
+    <div class="container" id="line-chart">
+        <h2>Line Chart</h2>
+        <p><strong>How It Works:</strong></p>
+        <p>1. Create an array of data points.</p>
+        <p>2. Use D3’s scale functions to normalize the data range.</p>
+        <p>3. Define a line generator function.</p>
+        <p>4. Append a path element to the SVG and set the 'd' attribute using the line generator.</p>
+        <svg width="500" height="300"></svg>
+        <script>
+            const lineData = [10, 40, 25, 60, 30, 80, 55];
+            const lineSvg = d3.select("#line-chart svg");
+            const lineScale = d3.scaleLinear().domain([0, 100]).range([300, 0]);
+            const line = d3.line()
+                .x((d, i) => i * 70)
+                .y(d => lineScale(d));
+            lineSvg.append("path")
+                .datum(lineData)
+                .attr("fill", "none")
+                .attr("stroke", "red")
+                .attr("stroke-width", 2)
+                .attr("d", line);
+        </script>
+    </div>
+    
+    <div class="container" id="scatter-plot">
+        <h2>Scatter Plot</h2>
+        <p><strong>How It Works:</strong></p>
+        <p>1. Define an array of objects containing x and y coordinates.</p>
+        <p>2. Select an SVG and bind data to circle elements.</p>
+        <p>3. Set the cx and cy attributes dynamically based on data.</p>
+        <svg width="500" height="300"></svg>
+        <script>
+            const scatterData = [{x: 50, y: 200}, {x: 150, y: 100}, {x: 250, y: 50}, {x: 350, y: 150}, {x: 450, y: 250}];
+            const scatterSvg = d3.select("#scatter-plot svg");
+            scatterSvg.selectAll("circle")
+                .data(scatterData)
+                .enter()
+                .append("circle")
+                .attr("cx", d => d.x)
+                .attr("cy", d => d.y)
+                .attr("r", 8)
+                .attr("fill", "green");
+        </script>
+    </div>
+    
+    <div class="container" id="bar-chart">
+        <h2>Bar Chart</h2>
+        <p><strong>How It Works:</strong></p>
+        <p>1. Define a dataset as an array of values.</p>
+        <p>2. Select an SVG element and define the bar width and spacing.</p>
+        <p>3. Bind the data to rectangles using D3’s enter() method.</p>
+        <p>4. Set the position and size dynamically based on data values.</p>
+        <svg width="500" height="300"></svg>
+        <script>
+            const barData = [30, 80, 45, 60, 20, 90, 50];
+            const svg = d3.select("#bar-chart svg");
+            const barWidth = 40;
+            const barSpacing = 10;
+            svg.selectAll("rect")
+                .data(barData)
+                .enter()
+                .append("rect")
+                .attr("x", (d, i) => i * (barWidth + barSpacing))
+                .attr("y", d => 300 - d * 3)
+                .attr("width", barWidth)
+                .attr("height", d => d * 3)
+                .attr("fill", "blue");
+        </script>
+    </div>
+    
+    
+</body>
+</html>
