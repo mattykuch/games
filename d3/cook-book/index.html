@@ -38,10 +38,9 @@
 <body>
     <div class="navbar">
         <a href="#intro">Introduction</a>
-        <a href="#bar-chart">Bar Chart</a>
         <a href="#line-chart">Line Chart</a>
         <a href="#scatter-plot">Scatter Plot</a>
-        <a href="#pie-chart">Pie Chart</a>
+        <a href="#bar-chart">Bar Chart</a>        
     </div>
     
     <div class="container" id="intro">
@@ -50,7 +49,7 @@
     </div>
 
     <div class="container" id="line-chart">
-        <h2>Line Chart</h2>
+        <h2>Basic Line Chart</h2>
         <p><strong>How It Works:</strong></p>
         <p>1. Create an array of data points.</p>
         <p>2. Use D3’s scale functions to normalize the data range.</p>
@@ -71,6 +70,62 @@
                 .attr("stroke-width", 2)
                 .attr("d", line);
         </script>
+    </div>
+    <div class="container">
+        <h2>Advanced Line Chart</h2>
+        <p><strong>Checklist:</strong></p>
+        <p>1. Access data.</p>
+        <p>2. Create chart dimensions.</p>
+        <p>3. Draw canvas</p>
+        <p>4. Create scales.</p>
+        <p>5. Draw data.</p>
+        <p>6. Draw peripherals</p>
+    </div>
+    <div class="container" id="wrapper">        
+        <script>
+            async function drawLineChart() {
+            // 1. Access data
+            const dataset = await d3.json("./nyc_weather_data.json")
+
+            const yAccessor = d => d.temperatureMax
+            const dateParser = d3.timeParse("%Y-%m-%d")
+            const xAccessor = d => dateParser(d.date)
+
+            // 2. Create chart dimensions
+            let dimensions = {
+            width: 800 * 0.9,
+            height: 400,
+            margin: {
+            top: 15,
+            right: 15,
+            bottom: 40,
+            left: 60,
+                },
+            }
+
+            dimensions.boundedWidth = dimensions.width - dimensions.margin.left - dimensions.margin.right
+            dimensions.boundedHeight = dimensions.height - dimensions.margin.top - dimensions.margin.bottom
+
+            // 3. Draw canvas
+
+            const wrapper = d3.select("#wrapper")
+                .append("svg")
+                    .attr("width", dimensions.width)
+                    .attr("height", dimensions.height)
+
+            const bounds = wrapper.append("g")
+                .style("transform", `translate(${
+                    dimensions.margin.left
+                }px, ${
+                    dimensions.margin.top
+                }px)`)
+
+            
+            }
+            drawLineChart()
+
+        </script>
+
     </div>
     
     <div class="container" id="scatter-plot">
