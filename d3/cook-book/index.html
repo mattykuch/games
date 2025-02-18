@@ -48,13 +48,12 @@
         <p>This website serves as a reference / cook book for myself, when it comes to D3.js. But, it will also teach anyone the fundamentals of data visualization using D3.js.</p>
     </div>
 
+    <div class="container" id="intro">
+        <img src="./assets/checklist.jpg" alt="Checklist image" style="width:700px; height:300px;">        
+    </div>
+
     <div class="container" id="line-chart">
         <h2>Basic Line Chart</h2>
-        <p><strong>Checklist:</strong></p>
-        <p>1. Create an array of data points.</p>
-        <p>2. Use D3’s scale functions to normalize the data range.</p>
-        <p>3. Define a line generator function.</p>
-        <p>4. Append a path element to the SVG and set the 'd' attribute using the line generator.</p>
         <svg width="500" height="300"></svg>
         <script>
             const lineData = [10, 40, 25, 60, 30, 80, 55];
@@ -73,14 +72,7 @@
     </div>
 
     <div class="container" id="wrapper">
-        <h2>Advanced Line Chart</h2>
-        <p><strong>Checklist:</strong></p>
-        <p>1. Access data.</p>
-        <p>2. Create chart dimensions.</p>
-        <p>3. Draw canvas</p>
-        <p>4. Create scales.</p>
-        <p>5. Draw data.</p>
-        <p>6. Draw peripherals</p>        
+        <h2>Advanced Line Chart</h2>      
         <script>
             async function drawLineChart() {
             // 1. Access data
@@ -170,7 +162,8 @@
             
 
             
-            }
+            }/* drawLineChart() */
+            
             drawLineChart()
 
         </script>
@@ -179,10 +172,6 @@
     
     <div class="container" id="scatter-plot">
         <h2>Scatter Plot</h2>
-        <p><strong>Checklist:</strong></p>
-        <p>1. Define an array of objects containing x and y coordinates.</p>
-        <p>2. Select an SVG and bind data to circle elements.</p>
-        <p>3. Set the cx and cy attributes dynamically based on data.</p>
         <svg width="500" height="300"></svg>
         <script>
             const scatterData = [{x: 50, y: 200}, {x: 150, y: 100}, {x: 250, y: 50}, {x: 350, y: 150}, {x: 450, y: 250}];
@@ -197,14 +186,61 @@
                 .attr("fill", "green");
         </script>
     </div>
+
+    <div class="container" id="wrapper2">
+        <h2>Advanced Scatter Plot</h2>       
+        <script>
+            async function drawScatter() {
+            // 1. Access data
+            const dataset = await d3.json("./nyc_weather_data.json")
+
+            const yAccessor = d => d.temperatureMax
+            const dateParser = d3.timeParse("%Y-%m-%d")
+            const xAccessor = d => dateParser(d.date)
+
+            // 2. Create chart dimensions
+            let dimensions = {
+            width: 800 * 0.9,
+            height: 400,
+            margin: {
+            top: 15,
+            right: 15,
+            bottom: 40,
+            left: 60,
+                },
+            }
+
+            dimensions.boundedWidth = dimensions.width - dimensions.margin.left - dimensions.margin.right
+            dimensions.boundedHeight = dimensions.height - dimensions.margin.top - dimensions.margin.bottom
+
+            // 3. Draw canvas
+
+            const wrapper = d3.select("#wrapper2")
+                .append("svg")
+                    .attr("width", dimensions.width)
+                    .attr("height", dimensions.height)
+
+            const bounds = wrapper.append("g")
+                .style("transform", `translate(${
+                    dimensions.margin.left
+                }px, ${
+                    dimensions.margin.top
+                }px)`)
+
+            // 4. Create scales
+
+
+            
+            }/* drawScatter() */
+            
+            drawScatter()
+
+        </script>
+
+    </div>
     
     <div class="container" id="bar-chart">
         <h2>Bar Chart</h2>
-        <p><strong>Checklist:</strong></p>
-        <p>1. Define a dataset as an array of values.</p>
-        <p>2. Select an SVG element and define the bar width and spacing.</p>
-        <p>3. Bind the data to rectangles using D3’s enter() method.</p>
-        <p>4. Set the position and size dynamically based on data values.</p>
         <svg width="500" height="300"></svg>
         <script>
             const barData = [30, 80, 45, 60, 20, 90, 50];
