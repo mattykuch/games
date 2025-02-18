@@ -50,7 +50,7 @@
 
     <div class="container" id="line-chart">
         <h2>Basic Line Chart</h2>
-        <p><strong>How It Works:</strong></p>
+        <p><strong>Checklist:</strong></p>
         <p>1. Create an array of data points.</p>
         <p>2. Use D3’s scale functions to normalize the data range.</p>
         <p>3. Define a line generator function.</p>
@@ -71,7 +71,8 @@
                 .attr("d", line);
         </script>
     </div>
-    <div class="container">
+
+    <div class="container" id="wrapper">
         <h2>Advanced Line Chart</h2>
         <p><strong>Checklist:</strong></p>
         <p>1. Access data.</p>
@@ -79,9 +80,7 @@
         <p>3. Draw canvas</p>
         <p>4. Create scales.</p>
         <p>5. Draw data.</p>
-        <p>6. Draw peripherals</p>
-    </div>
-    <div class="container" id="wrapper">        
+        <p>6. Draw peripherals</p>        
         <script>
             async function drawLineChart() {
             // 1. Access data
@@ -120,6 +119,56 @@
                     dimensions.margin.top
                 }px)`)
 
+            // 4. Create scales
+
+            const yScale = d3.scaleLinear()
+                .domain(d3.extent(dataset, yAccessor))
+                .range([dimensions.boundedHeight, 0])
+
+            const freezingTemperaturePlacement = yScale(32)
+            const freezingTemperatures = bounds.append("rect")
+                .attr("x", 0)
+                .attr("width", dimensions.boundedWidth)
+                .attr("y", freezingTemperaturePlacement)
+                .attr("height", dimensions.boundedHeight
+                    - freezingTemperaturePlacement)
+                .attr("fill", "#e0f3f3")
+
+                const xScale = d3.scaleTime()
+                    .domain(d3.extent(dataset, xAccessor))
+                    .range([0, dimensions.boundedWidth])  
+                    
+            // 5. Draw data
+
+            const lineGenerator = d3.line()
+                .x(d => xScale(xAccessor(d)))
+                .y(d => yScale(yAccessor(d)))
+
+            const line = bounds.append("path")
+                .attr("d", lineGenerator(dataset))
+                .attr("fill", "none")
+                .attr("stroke", "#af9358")
+                .attr("stroke-width", 2)
+
+            // 6. Draw peripherals
+
+            const yAxisGenerator = d3.axisLeft()
+                .scale(yScale)
+
+            const yAxis = bounds.append("g")
+            .call(yAxisGenerator)
+
+            const xAxisGenerator = d3.axisBottom()
+                .scale(xScale)
+
+            const xAxis = bounds.append("g")
+                .call(xAxisGenerator)
+                .style("transform", `translateY(${
+                    dimensions.boundedHeight
+                }px)`)
+
+            
+
             
             }
             drawLineChart()
@@ -130,7 +179,7 @@
     
     <div class="container" id="scatter-plot">
         <h2>Scatter Plot</h2>
-        <p><strong>How It Works:</strong></p>
+        <p><strong>Checklist:</strong></p>
         <p>1. Define an array of objects containing x and y coordinates.</p>
         <p>2. Select an SVG and bind data to circle elements.</p>
         <p>3. Set the cx and cy attributes dynamically based on data.</p>
@@ -151,7 +200,7 @@
     
     <div class="container" id="bar-chart">
         <h2>Bar Chart</h2>
-        <p><strong>How It Works:</strong></p>
+        <p><strong>Checklist:</strong></p>
         <p>1. Define a dataset as an array of values.</p>
         <p>2. Select an SVG element and define the bar width and spacing.</p>
         <p>3. Bind the data to rectangles using D3’s enter() method.</p>
