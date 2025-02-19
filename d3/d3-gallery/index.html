@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>D3.js Visualization Portfolio</title>
+    <style>
+        /* Base styles */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+        
+        header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 1.5rem;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: #3498db;
+        }
+        
+        main {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+        
+        .intro {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .intro h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .visualization-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .viz-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .viz-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+        
+        .viz-preview {
+            height: 200px;
+            background: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .viz-info {
+            padding: 1.5rem;
+        }
+        
+        .viz-info h3 {
+            margin-top: 0;
+            margin-bottom: 0.5rem;
+        }
+        
+        .viz-info p {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+        
+        .viz-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        
+        .tag {
+            background: #e0e0e0;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            color: #555;
+        }
+        
+        footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .visualization-page {
+            padding: 2rem;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .viz-container {
+            margin: 2rem 0;
+            border: 1px solid #eee;
+            padding: 1rem;
+            border-radius: 4px;
+        }
+        
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .visualization-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            nav {
+                flex-direction: column;
+            }
+            
+            .nav-links {
+                margin-top: 1rem;
+            }
+            
+            .nav-links li {
+                margin-left: 1rem;
+                margin-right: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">D3 Portfolio</div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="https://github.com/mattykuch" target="_blank">GitHub</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main>
+        <section class="intro">
+            <h1>Data Visualization Portfolio</h1>
+            <p>Exploring the power of D3.js through interactive data visualizations</p>
+        </section>
+        
+        <section class="visualization-grid">
+            <!-- Example Card 1 -->
+            <article class="viz-card">
+                <div class="viz-preview">
+                    <img src="./assets/bar-chart-race.jpg" width="550" height="200">
+                    <!-- D3 visualization will be rendered here -->
+                </div>
+                <div class="viz-info">
+                    <h3>Bar Chart Race</h3>
+                    <p>Animated visualization showing changing values over time</p>
+                    <div class="viz-tags">
+                        <span class="tag">D3.js</span>
+                        <span class="tag">Animation</span>
+                        <span class="tag">Time Series</span>
+                    </div>
+                    <a href="viz/bar-chart-race.html">View Full Project</a>
+                </div>
+            </article>
+            
+            <!-- Example Card 2 -->
+            <article class="viz-card">
+                <div class="viz-preview" id="preview-2">
+                    <!-- D3 visualization will be rendered here -->
+                </div>
+                <div class="viz-info">
+                    <h3>Force-Directed Graph</h3>
+                    <p>Network visualization with interactive node connections</p>
+                    <div class="viz-tags">
+                        <span class="tag">D3.js</span>
+                        <span class="tag">Network</span>
+                        <span class="tag">Interactive</span>
+                    </div>
+                    <a href="viz/force-directed.html">View Full Project</a>
+                </div>
+            </article>
+            
+            <!-- Example Card 3 -->
+            <article class="viz-card">
+                <div class="viz-preview" id="preview-3">
+                    <!-- D3 visualization will be rendered here -->
+                </div>
+                <div class="viz-info">
+                    <h3>Choropleth Map</h3>
+                    <p>Geographic data visualization with color-coded regions</p>
+                    <div class="viz-tags">
+                        <span class="tag">D3.js</span>
+                        <span class="tag">GeoJSON</span>
+                        <span class="tag">Mapping</span>
+                    </div>
+                    <a href="viz/choropleth.html">View Full Project</a>
+                </div>
+            </article>
+        </section>
+    </main>
+    
+    <footer>
+        <p>© 2025 Matthew Kuch | Built with D3.js</p>
+        <p>Connect with me: 
+            <a href="https://twitter.com/@matthewkuch" style="color: white;">Twitter</a> | 
+            <a href="https://www.linkedin.com/in/matthew-k-ab0134122/" style="color: white;">LinkedIn</a>
+        </p>
+    </footer>
+
+    <!-- D3.js Library -->
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    
+</body>
+</html>
