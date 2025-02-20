@@ -1,7 +1,7 @@
 
 var numberOfDrumButtons = document.querySelectorAll(".drum").length; // Calculate no. of drum buttons
 
-for (var i = 0 ; i < numberOfDrumButtons ; i++) { // Loop through each button and add sound based on which button is clicked
+for (var i = 0 ; i < numberOfDrumButtons ; i++) { // Loop through each button and add sound and animationm based on which button is clicked
 
 document.querySelectorAll(".drum")[i].addEventListener("click",function () { 
    

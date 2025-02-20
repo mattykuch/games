@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>D3.js Cookbook and Code Reference </title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f8f8f8;
+        }
+        .navbar {
+            background: #333;
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+        .navbar a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background: white;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        svg {
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <a href="#intro">Introduction</a>
+        <a href="#line-chart">Line Chart</a>
+        <a href="#scatter-plot">Scatter Plot</a>
+        <a href="#bar-chart">Bar Chart</a>        
+    </div>
+    
+    <div class="container" id="intro">
+        <h1>My D3.js Cookbook and Code Reference</h1>
+        <p>This website serves as a reference / cook book for myself, when it comes to D3.js. But, it will also teach anyone the fundamentals of data visualization using D3.js.</p>
+    </div>
+
+    <div class="container" id="intro">
+        <img src="./assets/checklist.jpg" alt="Checklist image" style="width:700px; height:300px;">        
+    </div>
+
+    <div class="container" id="line-chart">
+        <h2>Basic Line Chart</h2>
+        <svg width="500" height="300"></svg>
+        <script>
+            const lineData = [10, 40, 25, 60, 30, 80, 55];
+            const lineSvg = d3.select("#line-chart svg");
+            const lineScale = d3.scaleLinear().domain([0, 100]).range([300, 0]);
+            const line = d3.line()
+                .x((d, i) => i * 70)
+                .y(d => lineScale(d));
+            lineSvg.append("path")
+                .datum(lineData)
+                .attr("fill", "none")
+                .attr("stroke", "red")
+                .attr("stroke-width", 2)
+                .attr("d", line);
+        </script>
+    </div>
+    /* ////////////////////////// Advanced Line Chart /////////////////// */
+
+    <div class="container" id="wrapper">
+        <h2>Advanced Line Chart</h2>      
+        <script>
+            async function drawLineChart() {
+            // 1. Access data
+            const dataset = await d3.json("./nyc_weather_data.json")
+
+            const yAccessor = d => d.temperatureMax
+            const dateParser = d3.timeParse("%Y-%m-%d")
+            const xAccessor = d => dateParser(d.date)
+
+            // 2. Create chart dimensions
+            let dimensions = {
+            width: 800 * 0.9,
+            height: 400,
+            margin: {
+            top: 15,
+            right: 15,
+            bottom: 40,
+            left: 60,
+                },
+            }
+
+            dimensions.boundedWidth = dimensions.width - dimensions.margin.left - dimensions.margin.right
+            dimensions.boundedHeight = dimensions.height - dimensions.margin.top - dimensions.margin.bottom
+
+            // 3. Draw canvas
+
+            const wrapper = d3.select("#wrapper")
+                .append("svg")
+                    .attr("width", dimensions.width)
+                    .attr("height", dimensions.height)
+
+            const bounds = wrapper.append("g")
+                .style("transform", `translate(${
+                    dimensions.margin.left
+                }px, ${
+                    dimensions.margin.top
+                }px)`)
+
+            // 4. Create scales
+
+            const yScale = d3.scaleLinear()
+                .domain(d3.extent(dataset, yAccessor))
+                .range([dimensions.boundedHeight, 0])
+
+            const freezingTemperaturePlacement = yScale(32)
+            const freezingTemperatures = bounds.append("rect")
+                .attr("x", 0)
+                .attr("width", dimensions.boundedWidth)
+                .attr("y", freezingTemperaturePlacement)
+                .attr("height", dimensions.boundedHeight
+                    - freezingTemperaturePlacement)
+                .attr("fill", "#e0f3f3")
+
+                const xScale = d3.scaleTime()
+                    .domain(d3.extent(dataset, xAccessor))
+                    .range([0, dimensions.boundedWidth])  
+                    
+            // 5. Draw data
+
+            const lineGenerator = d3.line()
+                .x(d => xScale(xAccessor(d)))
+                .y(d => yScale(yAccessor(d)))
+
+            const line = bounds.append("path")
+                .attr("d", lineGenerator(dataset))
+                .attr("fill", "none")
+                .attr("stroke", "#af9358")
+                .attr("stroke-width", 2)
+
+            // 6. Draw peripherals
+
+            const yAxisGenerator = d3.axisLeft()
+                .scale(yScale)
+
+            const yAxis = bounds.append("g")
+            .call(yAxisGenerator)
+
+            const xAxisGenerator = d3.axisBottom()
+                .scale(xScale)
+
+            const xAxis = bounds.append("g")
+                .call(xAxisGenerator)
+                .style("transform", `translateY(${
+                    dimensions.boundedHeight
+                }px)`)
+
+            
+
+            
+            }/* drawLineChart() */
+            
+            drawLineChart()
+
+        </script>
+
+    </div>
+    
+    <div class="container" id="scatter-plot">
+        <h2>Scatter Plot</h2>
+        <svg width="500" height="300"></svg>
+        <script>
+            const scatterData = [{x: 50, y: 200}, {x: 150, y: 100}, {x: 250, y: 50}, {x: 350, y: 150}, {x: 450, y: 250}];
+            const scatterSvg = d3.select("#scatter-plot svg");
+            scatterSvg.selectAll("circle")
+                .data(scatterData)
+                .enter()
+                .append("circle")
+                .attr("cx", d => d.x)
+                .attr("cy", d => d.y)
+                .attr("r", 8)
+                .attr("fill", "green");
+        </script>
+    </div>
+
+    <div class="container" id="wrapper2">
+        <h2>Advanced Scatter Plot</h2>       
+        <script>
+            async function drawScatter() {
+            // 1. Access data
+            const dataset = await d3.json("./nyc_weather_data.json")
+
+            const yAccessor = d => d.temperatureMax
+            const dateParser = d3.timeParse("%Y-%m-%d")
+            const xAccessor = d => dateParser(d.date)
+
+            // 2. Create chart dimensions
+            let dimensions = {
+            width: 800 * 0.9,
+            height: 400,
+            margin: {
+            top: 15,
+            right: 15,
+            bottom: 40,
+            left: 60,
+                },
+            }
+
+            dimensions.boundedWidth = dimensions.width - dimensions.margin.left - dimensions.margin.right
+            dimensions.boundedHeight = dimensions.height - dimensions.margin.top - dimensions.margin.bottom
+
+            // 3. Draw canvas
+
+            const wrapper = d3.select("#wrapper2")
+                .append("svg")
+                    .attr("width", dimensions.width)
+                    .attr("height", dimensions.height)
+
+            const bounds = wrapper.append("g")
+                .style("transform", `translate(${
+                    dimensions.margin.left
+                }px, ${
+                    dimensions.margin.top
+                }px)`)
+
+            // 4. Create scales
+
+
+            
+            }/* drawScatter() */
+            
+            drawScatter()
+
+        </script>
+
+    </div>
+    
+    <div class="container" id="bar-chart">
+        <h2>Bar Chart</h2>
+        <svg width="500" height="300"></svg>
+        <script>
+            const barData = [30, 80, 45, 60, 20, 90, 50];
+            const svg = d3.select("#bar-chart svg");
+            const barWidth = 40;
+            const barSpacing = 10;
+            svg.selectAll("rect")
+                .data(barData)
+                .enter()
+                .append("rect")
+                .attr("x", (d, i) => i * (barWidth + barSpacing))
+                .attr("y", d => 300 - d * 3)
+                .attr("width", barWidth)
+                .attr("height", d => d * 3)
+                .attr("fill", "blue");
+        </script>
+    </div>
+    
+    
+</body>
+</html>
