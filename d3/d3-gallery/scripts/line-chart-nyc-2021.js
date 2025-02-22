@@ -45,7 +45,7 @@ async function drawLineChart2021() {
     // 3.2 Draw the "g" / "bounds" layer inside the svg, where the axes will be rendered later
 
     const bounds = wrapper.append("g") 
-    .style("transform", `translate(${
+    .style("transform", `translate(${ // Moves the "g" element to fit within the wrapper
         dimensions.margin.left
     }px, ${
         dimensions.margin.top
@@ -84,29 +84,20 @@ async function drawLineChart2021() {
 
     // 6. Draw peripherals i.e. axes
   
-    const yAxisGenerator = d3.axisLeft()
-      .scale(yScale)
+    const yAxisGenerator = d3.axisLeft() // Create the y axis using d3.axisLeft() method
+      .scale(yScale) // Dont forget to scale it
   
-    const yAxis = bounds.append("g")
+    const yAxis = bounds.append("g") // Append it to "g" element and then call the yAxisGenerator to draw it
       .call(yAxisGenerator)
   
-    const xAxisGenerator = d3.axisBottom()
-      .scale(xScale)
+    const xAxisGenerator = d3.axisBottom() // Create the x axis using d3.axisBottom() method
+      .scale(xScale) // Dont forget to scale it
   
-    const xAxis = bounds.append("g")
+    const xAxis = bounds.append("g") // Append it to the "g" element, then call the xAxisGenerator to draw it
       .call(xAxisGenerator)
-        .style("transform", `translateY(${
+        .style("transform", `translateY(${ // This moves the xAxis from the top to the bottom of the screen
           dimensions.boundedHeight
-        }px)`)
-
-
-
-
-
-
-
-
-    
+        }px)`)    
 }
 
 drawLineChart2021();
