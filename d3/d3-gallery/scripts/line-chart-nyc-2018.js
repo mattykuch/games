@@ -52,8 +52,7 @@ async function drawLineChart2018() {
         .attr("x", 0)
         .attr("width", dimensions.boundedWidth)
         .attr("y", freezingTemperaturePlacement)
-        .attr("height", dimensions.boundedHeight
-          - freezingTemperaturePlacement)
+        .attr("height", dimensions.boundedHeight - freezingTemperaturePlacement)
         .attr("fill", "#e0f3f3")
   
     const xScale = d3.scaleTime()
