@@ -1,5 +1,5 @@
 
-async function drawLineChart() {
+async function drawLineChart2018() {
 
     // 1. Access data
     const dataset = await d3.json("../data/nyc_weather_data.json")
@@ -29,7 +29,7 @@ async function drawLineChart() {
   
     // 3. Draw canvas
   
-    const wrapper = d3.select("#wrapper")
+    const wrapper = d3.select("#line-chart-1")
       .append("svg")
         .attr("width", dimensions.width)
         .attr("height", dimensions.height)
@@ -89,4 +89,4 @@ async function drawLineChart() {
           dimensions.boundedHeight
         }px)`)
   }
-  drawLineChart()
+  drawLineChart2018()
